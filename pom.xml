@@ -1,0 +1,155 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>weathernews</groupId> <!-- 設定したグループIDを入れる -->
+  <artifactId>WeatherNews</artifactId> <!-- 設定したアーティファクトIDを入れる -->
+  <packaging>jar</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>WeatherNews</name> <!-- 適当な名前を入れる -->
+  <url>http://maven.apache.org</url>
+
+  <parent>
+    <!-- Spring Bootの設定情報群を継承 -->
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.3.3.RELEASE</version>
+  </parent>
+
+  <!-- mavenコンパイラのバージョン設定 -->
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <!-- Spring BootでWebアプリを開発するための基本ライブラリ依存情報 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- Spring BootでTomcat用アプリを開発するための基本ライブラリ依存情報 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Javaクラス作るのを容易にするためのライブラリ -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.6</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Spring Data JPAを使うためのライブラリ依存情報 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <!-- H2データベース -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+    <!-- PostgreSQlデータベース -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+    <!-- Javaクラス作るのを容易にするためのライブラリ -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
+    <!-- Thymeleafを使うためのライブラリ依存情報 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <!-- BootStrap(CSSフレームワーク) -->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>3.3.6</version>
+    </dependency>
+    <!-- Spring Bootアプリをテストするために必要な基本ライブラリ依存情報 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+    </dependency>
+		<!-- Spring Securityを使うためのライブラリ依存情報 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency> 
+    <!-- thymeleafを使うためのライブラリ依存情報 -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+		</dependency>
+    <!-- Spring Bootアプリからメールを送信するためのライブラリ依存情報 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+    <!-- ユニットテスト用ライブラリ -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- ブラウザテスト用ライブラリ -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>2.50.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- json通信用 -->
+    <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-client</artifactId>
+        <version>1.9.1</version>
+    </dependency>
+    <!-- json整形用 -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.9.5</version>
+    </dependency>
+    <!-- json整形用 -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>2.9.5</version>
+    </dependency>
+    <!-- json整形用 -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.9.5</version>
+    </dependency>
+    <!-- GCP -->
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-language</artifactId>
+      <version>1.27.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+        <!-- Mavenを使ってSpring Bootを簡単にビルド・実行するためのプラグイン -->
+        <plugin>
+				  <groupId>org.springframework.boot</groupId>
+				  <artifactId>spring-boot-maven-plugin</artifactId>
+				  <!-- Fully Executable Jar ファイル生成用 -->
+				  <configuration>
+					  <executable>true</executable>
+				  </configuration>
+        </plugin>
+    </plugins>
+  </build>
+
+</project>

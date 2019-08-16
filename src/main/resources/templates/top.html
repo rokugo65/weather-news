@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http:///www.thymeleaf.org"> <!-- Themeleafを使うための名前空間を設定 -->
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"></link>
+    <link rel="stylesheet" href="/css/top.css" />
+    <title>天気予報</title>
+</head>
+<body>
+<div id="pagebody">
+    <h1>-天気予報-</h1>
+    <table class="table" name="userlisttable">
+        <thead>
+            <tr class="success">
+                <th></th>
+                <th th:text="*{WNList.get(0).city}"></th>
+                <th th:text="*{WNList.get(1).city}"></th>
+                <th th:text="*{WNList.get(2).city}"></th>
+                <th th:text="*{WNList.get(3).city}"></th>
+                <th th:text="*{WNList.get(4).city}"></th>
+                <th th:text="*{WNList.get(5).city}"></th>
+                <th th:text="*{WNList.get(6).city}"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="success" th:text="今日"></td>
+                <td th:text="*{WNList.get(0).telop_1}"></td>
+                <td th:text="*{WNList.get(1).telop_1}"></td>
+                <td th:text="*{WNList.get(2).telop_1}"></td>
+                <td th:text="*{WNList.get(3).telop_1}"></td>
+                <td th:text="*{WNList.get(4).telop_1}"></td>
+                <td th:text="*{WNList.get(5).telop_1}"></td>
+                <td th:text="*{WNList.get(6).telop_1}"></td>
+            </tr>
+            <tr>
+                <td class="success" th:text="明日"></td>
+                <td th:text="*{WNList.get(0).telop_2}"></td>
+                <td th:text="*{WNList.get(1).telop_2}"></td>
+                <td th:text="*{WNList.get(2).telop_2}"></td>
+                <td th:text="*{WNList.get(3).telop_2}"></td>
+                <td th:text="*{WNList.get(4).telop_2}"></td>
+                <td th:text="*{WNList.get(5).telop_2}"></td>
+                <td th:text="*{WNList.get(6).telop_2}"></td>
+            </tr>
+            <tr>
+                <td class="success" th:text="明後日"></td>
+                <td th:text="*{WNList.get(0).telop_3}"></td>
+                <td th:text="*{WNList.get(1).telop_3}"></td>
+                <td th:text="*{WNList.get(2).telop_3}"></td>
+                <td th:text="*{WNList.get(3).telop_3}"></td>
+                <td th:text="*{WNList.get(4).telop_3}"></td>
+                <td th:text="*{WNList.get(5).telop_3}"></td>
+                <td th:text="*{WNList.get(6).telop_3}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="barComposite"></div>
+    <div id="barComposite_2"></div>
+    <div id="barComposite_3"></div>
+</div>
+</body>
+
+<script src="js/frappe-charts.min.js"></script>
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+  'use strict';
+  var Chart = frappe.Chart; 
+
+  var CITY_NAMES = ["東京", "横浜", "千葉", "さいたま", "水戸", "宇都宮", "前橋"];
+
+  var tem_max = [ [[ ${WNList.get(0).getTemperatureMax_1()} ]], [[ ${WNList.get(1).getTemperatureMax_1()} ]], [[ ${WNList.get(2).getTemperatureMax_1()} ]], [[ ${WNList.get(3).getTemperatureMax_1()} ]], [[ ${WNList.get(4).getTemperatureMax_1()} ]], [[ ${WNList.get(5).getTemperatureMax_1()} ]], [[ ${WNList.get(6).getTemperatureMax_1()} ]] ];
+  var tem_min = [ [[ ${WNList.get(0).getTemperatureMin_1()} ]], [[ ${WNList.get(1).getTemperatureMin_1()} ]], [[ ${WNList.get(2).getTemperatureMin_1()} ]], [[ ${WNList.get(3).getTemperatureMin_1()} ]], [[ ${WNList.get(4).getTemperatureMin_1()} ]], [[ ${WNList.get(5).getTemperatureMin_1()} ]], [[ ${WNList.get(6).getTemperatureMin_1()} ]] ];
+
+  var barCompositeData = {
+    labels: CITY_NAMES,
+    datasets: [{
+      name: "最高気温",
+      values: tem_max
+    }, {
+      name: "最低気温",
+      values: tem_min
+    }]
+  };
+
+  var barComposite = {
+    elementID: "#barComposite",
+    options: {
+      title: "今日の予想気温",
+      data: barCompositeData,
+      type: "bar",
+      height: 210,
+      colors: ["red", "blue"],
+      valuesOverPoints: 1,
+      axisOptions: {
+        xAxisMode: "tick"
+      },
+      barOptions: {
+        stacked: 0
+      }
+    }
+  };
+
+  var bc = barComposite;
+  var barCompositeChart = new Chart(bc.elementID, bc.options);
+/*]]>*/
+</script>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+      'use strict';
+      var Chart = frappe.Chart; 
+    
+      var CITY_NAMES = ["東京", "横浜", "千葉", "さいたま", "水戸", "宇都宮", "前橋"];
+    
+      var tem_max = [ [[ ${WNList.get(0).getTemperatureMax_2()} ]], [[ ${WNList.get(1).getTemperatureMax_2()} ]], [[ ${WNList.get(2).getTemperatureMax_2()} ]], [[ ${WNList.get(3).getTemperatureMax_2()} ]], [[ ${WNList.get(4).getTemperatureMax_2()} ]], [[ ${WNList.get(5).getTemperatureMax_2()} ]], [[ ${WNList.get(6).getTemperatureMax_2()} ]] ];
+      var tem_min = [ [[ ${WNList.get(0).getTemperatureMin_2()} ]], [[ ${WNList.get(1).getTemperatureMin_2()} ]], [[ ${WNList.get(2).getTemperatureMin_2()} ]], [[ ${WNList.get(3).getTemperatureMin_2()} ]], [[ ${WNList.get(4).getTemperatureMin_2()} ]], [[ ${WNList.get(5).getTemperatureMin_2()} ]], [[ ${WNList.get(6).getTemperatureMin_2()} ]] ];
+    
+      var barCompositeData = {
+        labels: CITY_NAMES,
+        datasets: [{
+          name: "最高気温",
+          values: tem_max
+        }, {
+          name: "最低気温",
+          values: tem_min
+        }]
+      };
+    
+      var barComposite = {
+        elementID: "#barComposite_2",
+        options: {
+          title: "明日の予想気温",
+          data: barCompositeData,
+          type: "bar",
+          height: 210,
+          colors: ["red", "blue"],
+          valuesOverPoints: 1,
+          axisOptions: {
+            xAxisMode: "tick"
+          },
+          barOptions: {
+            stacked: 0
+          }
+        }
+      };
+    
+      var bc = barComposite;
+      var barCompositeChart = new Chart(bc.elementID, bc.options);
+    /*]]>*/
+</script>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+      'use strict';
+      var Chart = frappe.Chart; 
+    
+      var CITY_NAMES = ["東京", "横浜", "千葉", "さいたま", "水戸", "宇都宮", "前橋"];
+    
+      var tem_max = [ [[ ${WNList.get(0).getTemperatureMax_3()} ]], [[ ${WNList.get(1).getTemperatureMax_3()} ]], [[ ${WNList.get(2).getTemperatureMax_3()} ]], [[ ${WNList.get(3).getTemperatureMax_3()} ]], [[ ${WNList.get(4).getTemperatureMax_3()} ]], [[ ${WNList.get(5).getTemperatureMax_3()} ]], [[ ${WNList.get(6).getTemperatureMax_3()} ]] ];
+      var tem_min = [ [[ ${WNList.get(0).getTemperatureMin_3()} ]], [[ ${WNList.get(1).getTemperatureMin_3()} ]], [[ ${WNList.get(2).getTemperatureMin_3()} ]], [[ ${WNList.get(3).getTemperatureMin_3()} ]], [[ ${WNList.get(4).getTemperatureMin_3()} ]], [[ ${WNList.get(5).getTemperatureMin_3()} ]], [[ ${WNList.get(6).getTemperatureMin_3()} ]] ];
+    
+      var barCompositeData = {
+        labels: CITY_NAMES,
+        datasets: [{
+          name: "最高気温",
+          values: tem_max
+        }, {
+          name: "最低気温",
+          values: tem_min
+        }]
+      };
+    
+      var barComposite = {
+        elementID: "#barComposite_3",
+        options: {
+          title: "明後日の予想気温",
+          data: barCompositeData,
+          type: "bar",
+          height: 210,
+          colors: ["red", "blue"],
+          valuesOverPoints: 1,
+          axisOptions: {
+            xAxisMode: "tick"
+          },
+          barOptions: {
+            stacked: 0
+          }
+        }
+      };
+    
+      var bc = barComposite;
+      var barCompositeChart = new Chart(bc.elementID, bc.options);
+    /*]]>*/
+</script>
+
+
+</html>
